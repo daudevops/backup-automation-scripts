@@ -3,8 +3,8 @@
 # ==========================================
 # Script  : backup.sh
 # Purpose : Back up MySQL DB + files + logs
-# Author  : Your Name
-# Date    : March 2026
+# Author  : Mohammad Daud
+# Date    : 15 March 2026
 # ==========================================
 
 # --- Variables ---
