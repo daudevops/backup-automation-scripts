@@ -74,10 +74,23 @@ Automated using a cron job that runs every day at midnight.
 
 ---
 
+## What This Script Does
+- Runs automatically every day at midnight via cron job
+- Backs up MySQL database using mysqldump
+- Backs up data files and config files
+- Compresses everything into a .tar.gz file
+- Deletes backups older than 7 days automatically
+- Sends success email after every backup
+- Sends failure alert email if anything breaks
+
+---
+
 ## What I Learned
 - Bash scripting with variables, conditionals and functions
 - MySQL database backup using mysqldump
 - File compression using tar
-- Cron job scheduling
+- Cron job scheduling and automation
+- Email alerts using Gmail SMTP and msmtp
+- Retention policy implementation
 - Git version control and GitHub
 - Linux file permissions and navigation
