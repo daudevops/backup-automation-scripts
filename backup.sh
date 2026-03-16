@@ -55,8 +55,6 @@ else
     echo "[$DATE] ERROR: Compression failed!" | tee -a "$LOG_FILE"
 fi
 
-echo "[$DATE] ========== Backup Completed ==========" | tee -a "$LOG_FILE"
-echo "" >> "$LOG_FILE"
 
 # --- Step 4: Retention Policy - Delete backups older than 7 days ---
 echo "[$DATE] Starting retention policy cleanup..." | tee -a "$LOG_FILE"
@@ -68,3 +66,6 @@ if [ $? -eq 0 ]; then
 else
     echo "[$DATE] ERROR: Retention cleanup failed!" | tee -a "$LOG_FILE"
 fi
+
+echo "[$DATE] ========== Backup Completed ==========" | tee -a "$LOG_FILE"
+echo "" >> "$LOG_FILE"
