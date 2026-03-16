@@ -15,10 +15,15 @@ Built as part of my DevOps learning journey.
 
 ## Lab Environment
 
+### Cloud VM
+- Provider: Google Cloud Platform (GCP)
+- OS: Ubuntu 22.04 LTS
+- Machine Type: e2-micro
+- Region: asia-south1 (Mumbai, India)
+
 ### Local Machine
 - OS: Windows with WSL2 (Ubuntu 22.04)
-- Database: MySQL (local)
-- Editor: VS Code + Nano
+- Connection: SSH via terminal
 
 ---
 
