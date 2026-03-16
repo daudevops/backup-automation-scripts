@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# ==========================================
+# =========================================
 # Script  : backup.sh
 # Purpose : Back up MySQL DB + files + logs
-# Author  : Your Name
-# Date    : March 2026
-# ==========================================
+# Author  : Mohammad Daud
+# Role    : Cloud Engineer / Backup Administrator
+# Date    : 15 March 2026 
+# Version : 1.0
+# =========================================
 
 # --- Variables ---
 DATE=$(date +"%Y-%m-%d_%H-%M-%S")
