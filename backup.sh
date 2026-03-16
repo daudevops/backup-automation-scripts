@@ -16,6 +16,14 @@ LOG_FILE=~/backup-lab/logs/backup_log.txt
 DATA_DIR=~/backup-lab/data
 DB_NAME="backup_lab_db"
 DB_USER="root"
+EMAIL="daudevops@gmail.com"
+
+# --- Email Alert Function ---
+send_alert() {
+    local MESSAGE=$1
+    echo "$MESSAGE" | mail -s "🚨 Backup Alert - $(hostname) - $DATE" "$EMAIL"
+    echo "[$DATE] ALERT SENT: $MESSAGE" | tee -a "$LOG_FILE"
+}
 
 # --- Create backup folder for today ---
 mkdir -p "$BACKUP_DIR/$DATE"
@@ -31,6 +39,7 @@ if [ $? -eq 0 ]; then
     echo "[$DATE] SUCCESS: Database backup completed." | tee -a "$LOG_FILE"
 else
     echo "[$DATE] ERROR: Database backup failed!" | tee -a "$LOG_FILE"
+    send_alert "ERROR: Database backup failed on $(hostname). Please check logs at $LOG_FILE"
 fi
 
 # --- Step 2: Backup Data Files ---
@@ -42,6 +51,7 @@ if [ $? -eq 0 ]; then
     echo "[$DATE] SUCCESS: File backup completed." | tee -a "$LOG_FILE"
 else
     echo "[$DATE] ERROR: File backup failed!" | tee -a "$LOG_FILE"
+	send_alert "ERROR: Database backup failed on $(hostname). Please check logs at $LOG_FILE"
 fi
 
 # --- Step 3: Compress Everything ---
@@ -55,6 +65,7 @@ if [ $? -eq 0 ]; then
     rm -rf "$BACKUP_DIR/$DATE"
 else
     echo "[$DATE] ERROR: Compression failed!" | tee -a "$LOG_FILE"
+	send_alert "ERROR: Database backup failed on $(hostname). Please check logs at $LOG_FILE"
 fi
 
 
@@ -67,7 +78,13 @@ if [ $? -eq 0 ]; then
     echo "[$DATE] SUCCESS: Old backups cleaned up successfully." | tee -a "$LOG_FILE"
 else
     echo "[$DATE] ERROR: Retention cleanup failed!" | tee -a "$LOG_FILE"
+	send_alert "ERROR: Database backup failed on $(hostname). Please check logs at $LOG_FILE"
 fi
 
 echo "[$DATE] ========== Backup Completed ==========" | tee -a "$LOG_FILE"
+
+# --- Send Success Alert ---
+echo "Backup completed successfully on $(hostname) at $DATE. Check logs at $LOG_FILE" | mail -s "✅ Backup Success - $(hostname) - $DATE" "$EMAIL"
+echo "[$DATE] SUCCESS ALERT SENT" | tee -a "$LOG_FILE"
+
 echo "" >> "$LOG_FILE"
