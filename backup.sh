@@ -3,8 +3,8 @@
 # ==========================================
 # Script  : backup.sh
 # Purpose : Back up MySQL DB + files + logs
-# Author  : Mohammad Daud
-# Date    : 15 March 2026
+# Author  : Your Name
+# Date    : March 2026
 # ==========================================
 
 # --- Variables ---
@@ -58,3 +58,13 @@ fi
 echo "[$DATE] ========== Backup Completed ==========" | tee -a "$LOG_FILE"
 echo "" >> "$LOG_FILE"
 
+# --- Step 4: Retention Policy - Delete backups older than 7 days ---
+echo "[$DATE] Starting retention policy cleanup..." | tee -a "$LOG_FILE"
+
+find "$BACKUP_DIR" -name "backup_*.tar.gz" -mtime +7 -type f -delete
+
+if [ $? -eq 0 ]; then
+    echo "[$DATE] SUCCESS: Old backups cleaned up successfully." | tee -a "$LOG_FILE"
+else
+    echo "[$DATE] ERROR: Retention cleanup failed!" | tee -a "$LOG_FILE"
+fi
