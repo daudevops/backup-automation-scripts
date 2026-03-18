@@ -1,0 +1,5 @@
+.msmtprc
+*.sql
+*.tar.gz
+backup_log.txt
+cron_log.txt
