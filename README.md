@@ -15,6 +15,22 @@ Built as part of my DevOps learning journey.
 
 ## Lab Environment
 
+## Docker
+
+This project is fully containerized using Docker.
+
+### Build Image
+docker build -t backup-tool .
+
+### Run Container
+docker run backup-tool
+
+### What Container Includes
+- Ubuntu 22.04 base
+- MySQL client
+- Backup script
+- Email alerts via Gmail SMTP
+
 ### Cloud VM
 - Provider: Google Cloud Platform (GCP)
 - OS: Ubuntu 22.04 LTS

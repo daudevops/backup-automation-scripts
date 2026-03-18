@@ -33,7 +33,7 @@ echo "[$DATE] ========== Backup Started ==========" | tee -a "$LOG_FILE"
 # --- Step 1: Backup MySQL Database ---
 echo "[$DATE] Starting database backup..." | tee -a "$LOG_FILE"
 
-sudo mysqldump "$DB_NAME" > "$BACKUP_DIR/$DATE/${DB_NAME}_backup.sql" 2>> "$LOG_FILE"
+mysqldump -h 172.17.0.1 -u backupuser -ppassword123 "$DB_NAME" > "$BACKUP_DIR/$DATE/${DB_NAME}_backup.sql" 2>> "$LOG_FILE"
 
 if [ $? -eq 0 ]; then
     echo "[$DATE] SUCCESS: Database backup completed." | tee -a "$LOG_FILE"
