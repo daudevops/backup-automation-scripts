@@ -7,33 +7,29 @@
 
 name: Backup Script Validation
 
-# When to run this workflow
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
-# What to run
 jobs:
   validate-scripts:
     name: Validate Backup Scripts
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1 - Get your code
       - name: Checkout code
         uses: actions/checkout@v4
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
-      # Step 2 - Install bash checking tool
       - name: Install shellcheck
         run: sudo apt-get install -y shellcheck
 
-      # Step 3 - Check backup.sh for errors
       - name: Run shellcheck on backup.sh
         run: shellcheck backup.sh
 
-      # Step 4 - Validate Dockerfile exists
       - name: Check Dockerfile exists
         run: |
           if [ -f Dockerfile ]; then
@@ -43,10 +39,8 @@ jobs:
             exit 1
           fi
 
-      # Step 5 - Build Docker image
       - name: Build Docker image
         run: docker build -t backup-tool .
 
-      # Step 6 - Print success message
       - name: Success
-        run: echo "✅ All checks passed! Backup scripts are valid."
+        run: echo "✅ All checks passed!"
