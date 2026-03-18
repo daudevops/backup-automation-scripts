@@ -15,6 +15,19 @@ Built as part of my DevOps learning journey.
 
 ## Lab Environment
 
+## CI/CD Pipeline
+
+This project uses GitHub Actions for automated validation.
+
+### What the Pipeline Does
+- Runs automatically on every push to main
+- Validates backup.sh using shellcheck
+- Confirms Dockerfile exists
+- Builds Docker image to verify it works
+
+### Pipeline Status
+![Backup Script Validation](https://github.com/daudevops/backup-automation-scripts/actions/workflows/backup-check.yml/badge.svg)
+
 ## Docker
 
 This project is fully containerized using Docker.
