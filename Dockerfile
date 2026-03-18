@@ -31,8 +31,7 @@ RUN mkdir -p /root/backup-lab/data && \
 COPY backup.sh /backup-lab/scripts/backup.sh
 
 # SMTP 
-COPY .msmtprc /root/.msmtprc
-RUN chmod 600 /root/.msmtprc
+RUN touch /root/.msmtprc && chmod 600 /root/.msmtprc
 
 # Make script executable
 RUN chmod +x /backup-lab/scripts/backup.sh
